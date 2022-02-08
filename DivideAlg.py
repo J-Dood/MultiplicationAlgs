@@ -8,8 +8,8 @@
 
 def divide(polyA, polyB):
     """
-    :argument poly1: List
-    :argument poly2: List
+    :argument polyA: List
+    :argument polyB: List
     :returns: List
     """
     polyA, polyB = adjust(polyA, polyB)
@@ -20,7 +20,7 @@ def divide(polyA, polyB):
 
     # Base Case
     if len(polyA) == 1:
-        return polyA[0]*polyB[0]
+        return [polyA[0]*polyB[0]]
     # Recursive Case
     else:
         # Make Polynomials even lengths
@@ -30,11 +30,27 @@ def divide(polyA, polyB):
 
         # Split the polynomial
         middle = len(polyA)//2
-        polyA_1 = polyA[:middle]
-        polyA_2 = polyA[middle:]
-        polyB_1 = polyB[:middle]
-        polyB_2 = polyB[middle:]
+        polyA1, polyA2 = split(polyA, middle)
+        polyB1, polyB2 = split(polyB, middle)
 
+        # First Term (X^n)*A(X)*B(X)
+        term = polyA[-1] * polyB[-1]
+        result[-1] += term
+
+        # TODO
+        # Need to shift things, that is one issue
+
+        # Middle Terms, with recursive calls (X^n/2)*A(X)*B(X)
+        second = divide(addition(polyA1, polyA2), addition(polyB1, polyB2))
+        second = subtraction(second, shift(divide(polyA2, polyB2), middle))
+        second = subtraction(second, divide(polyA1, polyB1))
+        for i in range(len(second)):
+            result[i+1] += second[i]
+
+        # Last Term A(X)*B(X)
+        term = polyA[0] * polyB[0]
+        result[0] += term
+    print(result)
     return result
 
 
@@ -58,17 +74,40 @@ def extend(poly, number):
 # Function to handle addition: poly1 + poly2
 def addition(poly1, poly2):
     poly1, poly2 = adjust(poly1, poly2)
+    poly = []
     for i in range(len(poly1)):
-        poly1[i] += poly2[i]
-    return poly1
+        poly.append(poly1[i] + poly2[i])
+    return poly
 
 
 # Function to handle subtraction: poly1 - poly2
 def subtraction(poly1, poly2):
     poly1, poly2 = adjust(poly1, poly2)
+    poly = []
     for i in range(len(poly1)):
-        poly1[i] -= poly2[i]
-    return poly1
+        poly.append(poly1[i] - poly2[i])
+    return poly
+
+
+# Function to shift the terms of a polynomial array a desired degree
+def shift(poly, number):
+    result = []
+    for i in range(number):
+        result.append(0)
+    for term in poly:
+        result.append(term)
+    return result
+
+
+# Function for splitting a polynomial
+def split(poly, middle):
+    poly1 = []
+    poly2 = []
+    for i in range(middle):
+        poly1.append(poly[i])
+    for j in range(middle, middle*2):
+        poly2.append(poly[j])
+    return poly1, poly2
 
 
 # Driver for testing

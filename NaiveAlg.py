@@ -5,6 +5,8 @@
 #
 # This file runs the naive O(n^2) algorithm
 
+import Polynomial
+
 def naive(poly1, poly2):
     """
     :argument poly1: List
@@ -44,4 +46,4 @@ if __name__ == '__main__':
     test2 = [-8, 10]    # 10X -8
     test3 = [0]
     print(naive(test1, test2))  # 50X^3 - 80X^2 + 62X -24 --> [-24, 62, -80, 50, 0]
-    print(naive(test1, test3))  # 0 --> [0, 0, 0, 0, 0]
+    print(naive(test1, test3))
