@@ -10,25 +10,21 @@
 # to the degree of the term.
 class Polynomial:
 
-# Constructor
+    # Constructor
     def __init__(self, coefficients):
         self.coefficients = coefficients
 
+    # This function returns the maximum term of a polynomial as a string
+    def get_max_term(self):
+        return str(self.coefficients[len(self.coefficients)]) + "X^" + str(len(self.coefficients))
 
-# This function returns the maximum term of a polynomial as a string
-    def getmaxTerm(self):
-        return str(self.coefficients[self.coefficients.length]) + "X^" + str(self.coefficients.length)
-
-
-# This function returns the minimum term of a polynomial as a string
-    def getminTerm(self):
+    # This function returns the minimum term of a polynomial as a string
+    def get_min_term(self):
         return str(self.coefficients[0])
 
-
-# This function returns all of the terms of a polynomial as a string
-    def getall(self):
+    # This function returns all of the terms of a polynomial as a string
+    def get_all(self):
         polynomial = "Y(X) ="
-        for i in range(self.coefficients.length):
+        for i in range(len(self.coefficients)):
             polynomial += (" " + str() + "X^" + str(i))
         return polynomial
-
