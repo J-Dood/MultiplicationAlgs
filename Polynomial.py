@@ -18,7 +18,43 @@ class Polynomial:
 
     # Addition Override
     def __add__(self, other):
-        pass # Not done!
+        new_array = []
+        if len(self.coefficients) < len(other.coefficients):
+            min = len(self.coefficients)
+            dif = len(other.coefficients)-len(self.coefficients)
+            flag = True
+        elif len(self.coefficients) > len(other.coefficients):
+            min = len(other.coefficients)
+            dif = len(self.coefficients)-len(other.coefficients)
+            flag = False
+        for i in range(min):
+            new_array.append(self.coefficients[i] + other.coefficients[i])
+        for j in range(min, dif + min):
+            if flag:
+                new_array.append(other.coefficients[j])
+            else:
+                new_array.append(self.coefficients[j])
+        return new_array
+
+    # Subtraction Override
+    def __sub__(self, other):
+        new_array = []
+        if len(self.coefficients) < len(other.coefficients):
+            min = len(self.coefficients)
+            dif = len(other.coefficients) - len(self.coefficients)
+            flag = True
+        elif len(self.coefficients) > len(other.coefficients):
+            min = len(other.coefficients)
+            dif = len(self.coefficients) - len(other.coefficients)
+            flag = False
+        for i in range(min):
+            new_array.append(self.coefficients[i] - other.coefficients[i])
+        for j in range(min, dif + min):
+            if flag:
+                new_array.append(0 - other.coefficients[j])
+            else:
+                new_array.append(0 - self.coefficients[j])
+        return new_array
 
     # This function returns the maximum term of a polynomial as a string
     def get_max_term(self):
@@ -36,10 +72,12 @@ class Polynomial:
                 polynomial += (" " + str(self.coefficients[i]) + "X^" + str(i))
         return polynomial
 
+
 # Driver for testing
 if __name__ == '__main__':
-    test1 = Polynomial([3, -4, 0, 5])  # 5X^2 - 4X + 3
-    test2 = Polynomial([-8, 10])    # 10X -8
-    test3 = Polynomial([0])         # 0x
-    print(test1.get_all())
+    test1 = Polynomial([3, -4, 0, 5])   # 5X^2 - 4X + 3
+    test2 = Polynomial([-8, 10])        # 10X -8
+    test3 = Polynomial([0])             # 0x
+    print(test1 + test2)
+    print(test1 - test2)
 
