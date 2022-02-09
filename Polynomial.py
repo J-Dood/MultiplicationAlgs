@@ -8,6 +8,8 @@
 
 # The class stores the coefficients of a polynomial in an array where the index corresponds
 # to the degree of the term.
+
+
 class Polynomial:
 
     # Constructor
@@ -30,13 +32,14 @@ class Polynomial:
     def get_all(self):
         polynomial = "Y(X) ="
         for i in range(len(self.coefficients)):
-            polynomial += (" " + str() + "X^" + str(i))
+            if self.coefficients[i] != 0:
+                polynomial += (" " + str(self.coefficients[i]) + "X^" + str(i))
         return polynomial
 
 # Driver for testing
 if __name__ == '__main__':
-    test1 = polynomial([3, -4, 5])  # 5X^2 - 4X + 3
-    test2 = [-8, 10]  # 10X -8
-    test3 = [0]
-    print(naive(test1, test2))  # 50X^3 - 80X^2 + 62X -24 --> [-24, 62, -80, 50, 0]
-    print(naive(test1, test3))
+    test1 = Polynomial([3, -4, 0, 5])  # 5X^2 - 4X + 3
+    test2 = Polynomial([-8, 10])    # 10X -8
+    test3 = Polynomial([0])         # 0x
+    print(test1.get_all())
+

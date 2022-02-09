@@ -12,11 +12,10 @@ import Polynomial
 import time
 
 
-
 # Functions
 
 # A function that returns a random polynomial array of a specified size with coefficients of +-99
-def randomArray(degree):
+def random_array(degree):
     array = []
     for i in range(degree+1):
         array.append(ran.randint(-100, 100))
@@ -30,8 +29,8 @@ def data():
     for point in points:
         average = 0
         for i in range(20):
-            poly1 = Polynomial(randomArray(i))
-            poly2 = Polynomial(randomArray(i))
+            poly1 = Polynomial(random_array(i))
+            poly2 = Polynomial(random_array(i))
             start = time()
             # Multiply poly1 and poly2 here
             end = time()

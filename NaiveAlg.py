@@ -44,6 +44,6 @@ def extend(poly, number):
 if __name__ == '__main__':
     test1 = [3, -4, 5]  # 5X^2 - 4X + 3
     test2 = [-8, 10]    # 10X -8
-    test3 = [0]
+    test3 = [0]         # 0x
     print(naive(test1, test2))  # 50X^3 - 80X^2 + 62X -24 --> [-24, 62, -80, 50, 0]
-    print(naive(test1, test3))
+    print(naive(test1, test3))  # [0, 0, 0, 0, 0]
