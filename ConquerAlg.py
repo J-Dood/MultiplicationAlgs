@@ -34,9 +34,9 @@ def conquer(polyA, polyB):
 
         # Create and populate result list with 0's
         result_len = 2*len(polyA) - 1
-        result = []
-        for i in range(result_len):
-            result.append(0)
+        result = [0]*result_len
+        #for i in range(result_len):
+        #    result.append(0)
 
         # Lowest Term Regression 1
         firsts = conquer(polyA1, polyB1)
@@ -103,9 +103,9 @@ def subtraction(poly1, poly2):
 
 # Function to shift the terms of a polynomial array up a Desired number of degrees
 def shift(poly, number):
-    result = []
-    for i in range(number):
-        result.append(0)
+    result = [0]*number
+    #for i in range(number):
+    #    result.append(0)
     for term in poly:
         result.append(term)
     return result
